@@ -9,9 +9,32 @@
 <script defer src="main.js"></script></head>
 
 <body>
-    <h1>Hello, webpack!</h1>
+    <h1>Leaderboard</h1>
+    <div class="flex">
+        <div id="recent-socres">
+            <h2>Recent Scores <button type="button">Refresh</button></h2>
+            <ul>
+                <li>
+                    <p>name:100</p>
+                </li>
+                <li>
+                    <p>name:20</p>
+                </li>
+                <li>
+                    <p>name:50</p>
+                </li>
+            </ul>
+        </div>
+        <div id="add-score">
+            <h2>Add your score</h2>
+            <input type="text" placeholder="Your name" id="input-name"><br>
+            <input type="text" placeholder="Your score" id="input-score"><br>
+            <input type="submit" value="Submit" id="name-socre-submit">
+        </div>
+    </div>
 
+    <script src="index.js"></script>
 </body>
-<script src="index.js"></script>
+
 
 </html>
