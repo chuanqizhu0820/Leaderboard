@@ -1,17 +1,25 @@
 import './style.css';
 
-fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
-  method: 'POST',
-  body: JSON.stringify({
-    name: 'foo',
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
-  .then((response) => response.json())
-  .then((json) => {
-    const gameId = json.result.split(' ')[3];
+let gameId = "";
+
+let createGame = async () => {
+
+    await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
+        method: 'POST',
+        body: JSON.stringify({
+            name: 'foo',
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => response.json())
+        .then((json) => {
+            gameId = json.result.split(' ')[3];
+        });
+}
+
+let createForm = () => {
     const formHtml = `
             <h2>Add your score</h2>
             <form action="https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores"
@@ -23,42 +31,56 @@ fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
         `;
     const formDiv = document.querySelector('#add-score');
     formDiv.innerHTML = formHtml;
+}
 
-    const socreFrom = document.querySelector('#name-socre-form');
-    const nameInput = document.querySelector('#input-name');
-    const scoreInput = document.querySelector('#input-score');
 
-    socreFrom.addEventListener('submit', (e) => {
-      e.preventDefault();
 
-      fetch(socreFrom.action, {
+let addScore = async (name0, score0) => {
+    await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores`, {
         method: 'POST',
         body: JSON.stringify({
-          user: nameInput.value,
-          score: scoreInput.value,
+            user: name0,
+            score: score0,
         }),
         headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+            'Content-type': 'application/json; charset=UTF-8',
         },
-      })
+    })
         .then((response) => response.json())
-        .then((json) => console.log(json));
-    });
+        .then((json) => { return });
+}
 
-    const refreshBtn = document.querySelector('#refresh-btn');
+
+let refreshSocre = async () => {
     const nameScoreList = document.querySelector('#name-score-list');
-    refreshBtn.addEventListener('click', () => {
-      fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores`)
+    await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores`)
         .then((response) => response.json())
         .then((json) => {
-          let listHtml = '';
-          const jsonArr = json.result;
-          jsonArr.forEach((item) => {
-            listHtml += `
+            let listHtml = '';
+            const jsonArr = json.result;
+            jsonArr.forEach((item) => {
+                listHtml += `
                         <li>${item.user}:${item.score}</li>
                         `;
-          });
-          nameScoreList.innerHTML = listHtml;
+            });
+            nameScoreList.innerHTML = listHtml;
         });
-    });
-  });
+
+}
+
+createGame();
+
+createForm();
+
+const scoreForm = document.querySelector('#name-socre-form');
+
+scoreForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    addScore(scoreForm.name.value, scoreForm.score.value);
+});
+
+const refreshBtn = document.querySelector('#refresh-btn');
+
+refreshBtn.addEventListener('click', () => {
+    refreshSocre();
+});
