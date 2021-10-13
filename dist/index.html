@@ -23,13 +23,25 @@
                 <li>
                     <p>name:50</p>
                 </li>
+                <li>
+                    <p>name:100</p>
+                </li>
+                <li>
+                    <p>name:20</p>
+                </li>
+                <li>
+                    <p>name:50</p>
+                </li>
             </ul>
         </div>
         <div id="add-score">
             <h2>Add your score</h2>
-            <input type="text" placeholder="Your name" id="input-name"><br>
-            <input type="text" placeholder="Your score" id="input-score"><br>
-            <input type="submit" value="Submit" id="name-socre-submit">
+            <form action="https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/:id/scores"
+                method="post">
+                <input type="text" placeholder="Your name" id="input-name"><br>
+                <input type="text" placeholder="Your score" id="input-score"><br>
+                <input type="submit" value="Submit" id="name-socre-submit">
+            </form>
         </div>
     </div>
 
