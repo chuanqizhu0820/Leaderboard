@@ -16,7 +16,7 @@ Webpack
 Get a local copy on you computer, 
 
 ```
-git clone 
+git clone https://github.com/chuanqizhu0820/Leaderboard.git
 ```
 
 <!-- ### Prerequisites -->
