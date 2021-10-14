@@ -11,23 +11,26 @@
 </head>
 
 <body>
-    <h1 class="offset-3">Leaderboard</h1>
-    <div class="row mt-4">
-        <div id="recent-scores" class="col-3 offset-3">
-            <div class="d-flex flex-row justify-content-start mb-3">
-                <h4>Recent Scores</h4>
-                <div id="refresh-btn">
-                    <img src="https://img.icons8.com/ios-glyphs/30/000000/refresh--v2.png" alt="refresh" />
+    <main>
+        <h1 class="offset-3">Leaderboard</h1>
+        <div class="row mt-4">
+            <div id="recent-scores" class="col-3 offset-3">
+                <div class="d-flex flex-row justify-content-start mb-3">
+                    <h4>Recent Scores</h4>
+                    <div id="refresh-btn">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/refresh--v2.png" alt="refresh" />
+                    </div>
+
                 </div>
-
+                <ul id="name-score-list" class="list-group list-group-flush">
+                </ul>
             </div>
-            <ul id="name-score-list" class="list-group list-group-flush">
-            </ul>
-        </div>
 
-        <div id="add-score" class="col-3">
+            <div id="add-score" class="col-3">
+            </div>
         </div>
-    </div>
+    </main>
+
 
     <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
