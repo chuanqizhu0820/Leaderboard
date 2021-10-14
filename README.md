@@ -1,6 +1,7 @@
 # Leaderboard
 Microverse Program Project
 
+![screenshot](leaderboard.png)
 
 ## Built With
 

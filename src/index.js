@@ -21,12 +21,16 @@ const createGame = async () => {
 
 const createForm = () => {
   const formHtml = `
-            <h2>Add your score</h2>
+            <h4 class="mb-3">Add your score</h4>
             <form action= ${baseUri}+${gameId}+"/scores"
             method="post" id="name-score-form">
-            <input type="text" name="name" placeholder="Your name" id="input-name" required><br>
-            <input type="number" name="score" placeholder="Your score" id="input-score" required><br>
-            <input type="submit" value="Submit" id="name-score-submit">
+            <div class="mb-3">
+            <input type="text" name="name" placeholder="Your name" id="input-name" class="form-control" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+            <input type="number" name="score" placeholder="Your score" class="form-control" id="input-score" required>
+            </div>
+            <input type="submit" class="btn btn-outline-secondary" value="Submit" id="name-score-submit">
             </form>
         `;
   const formDiv = document.querySelector('#add-score');
@@ -53,10 +57,12 @@ const refreshScore = async () => {
   response.json().then((json) => {
     let listHtml = '';
     const jsonArr = json.result;
-    jsonArr.forEach((item) => {
-      listHtml += `
-                        <li>${item.user}:${item.score}</li>
-                        `;
+    jsonArr.forEach((item, i) => {
+      if (i % 2 === 0) {
+        listHtml += `<li class="list-group-item">${item.user}: ${item.score}</li>`;
+      } else {
+        listHtml += `<li class="list-group-item list-group-item-secondary">${item.user}: ${item.score}</li>`;
+      }
     });
     nameScoreList.innerHTML = listHtml;
   });

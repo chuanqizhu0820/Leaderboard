@@ -1,32 +1,24 @@
 body {
   margin-top: 10vh;
-  margin-left: 20vw;
+}
+
+ul {
+  border: solid grey 1px;
 }
 
 li {
   list-style-type: none;
 }
 
-ul {
-  padding-left: 10px;
-  width: 210px;
-  border: solid grey 1px;
+#refresh-btn {
+  margin-left: 15px;
 }
 
-.flex {
-  display: flex;
-  flex-direction: row;
+#refresh-btn img {
+  width: 80%;
+  height: auto;
 }
 
-#add-score {
-  margin-left: 5vw;
-}
-
-#input-name,
-#input-score {
-  margin-bottom: 15px;
-}
-
-#name-socre-submit {
-  margin-left: 90px;
+#refresh-btn :hover {
+  cursor: pointer;
 }
