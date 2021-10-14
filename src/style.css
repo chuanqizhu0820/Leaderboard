@@ -9,3 +9,12 @@ li {
 #refresh-btn {
   margin-left: 15px;
 }
+
+#refresh-btn img {
+  width: 80%;
+  height: auto;
+}
+
+#refresh-btn :hover {
+  cursor: pointer;
+}
