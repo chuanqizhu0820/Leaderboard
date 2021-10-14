@@ -1,9 +1,10 @@
 import './style.css';
 
 let gameId = '';
+const baseUri = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
 
 const createGame = async () => {
-  const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
+  const response = await fetch(baseUri, {
     method: 'POST',
     body: JSON.stringify({
       name: 'foo',
@@ -21,11 +22,11 @@ const createGame = async () => {
 const createForm = () => {
   const formHtml = `
             <h2>Add your score</h2>
-            <form action="https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores"
-            method="post" id="name-socre-form">
-            <input type="text" name="name" placeholder="Your name" id="input-name"><br>
-            <input type="text" name="score" placeholder="Your score" id="input-score"><br>
-            <input type="submit" value="Submit" id="name-socre-submit">
+            <form action= ${baseUri}+${gameId}+"/scores"
+            method="post" id="name-score-form">
+            <input type="text" name="name" placeholder="Your name" id="input-name" required><br>
+            <input type="number" name="score" placeholder="Your score" id="input-score" required><br>
+            <input type="submit" value="Submit" id="name-score-submit">
             </form>
         `;
   const formDiv = document.querySelector('#add-score');
@@ -33,7 +34,7 @@ const createForm = () => {
 };
 
 const addScore = async (name0, score0) => {
-  const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores`, {
+  const response = await fetch(`${baseUri}${gameId}/scores`, {
     method: 'POST',
     body: JSON.stringify({
       user: name0,
@@ -46,9 +47,9 @@ const addScore = async (name0, score0) => {
   return response.json();
 };
 
-const refreshSocre = async () => {
+const refreshScore = async () => {
   const nameScoreList = document.querySelector('#name-score-list');
-  const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores`);
+  const response = await fetch(`${baseUri}${gameId}/scores`);
   response.json().then((json) => {
     let listHtml = '';
     const jsonArr = json.result;
@@ -65,7 +66,7 @@ createGame();
 
 createForm();
 
-const scoreForm = document.querySelector('#name-socre-form');
+const scoreForm = document.querySelector('#name-score-form');
 
 scoreForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -75,5 +76,5 @@ scoreForm.addEventListener('submit', (e) => {
 const refreshBtn = document.querySelector('#refresh-btn');
 
 refreshBtn.addEventListener('click', () => {
-  refreshSocre();
+  refreshScore();
 });
